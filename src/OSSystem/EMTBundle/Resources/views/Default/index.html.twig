@@ -1,0 +1,10 @@
+{% extends 'base.html.twig'  %}
+
+{% block banner %}{% endblock %}
+{% block nav %}{% endblock %}
+
+{% block SignIn %}
+    <div class="banner-home 1">
+        {% include "FOSUserBundle:Security:login.html.twig" %}
+    </div>
+{% endblock %}

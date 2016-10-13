@@ -1,0 +1,213 @@
+emt_contact_us: Contact us
+emt_disclaimer: Disclaimer
+emt_register: Register
+emt_conf_all: All conferences
+emt_conf_archives: Archives 
+emt_register_description: This step allow you to create a profile which will enable you to submit conferences or review the status of your conferences in the future.
+emt_registration:
+    check_email: An e-mail has been sent to %email% please confirm your registration by clicking on the link provided in the e-mail. If you have not received the e-mail within 6 hours, please double check your spam folder or
+    confirmed: Thank you for activating. Now you can <a href="%path%">%sign_in%</a> and fill your profile.
+emt_user:
+    address: Adress
+    category: Category
+    city: City/Town
+    country: Country
+    email: Email address
+    fName: First name
+    jobTitle: Job title
+    lName: Last name
+    optIn: Opt in
+    organization: Organization Name
+    password: Password
+    phone: Telephone
+    plain_password: Password Again
+    postalCode: Postal code
+    title: Title
+    username: Username
+    default:
+        address: rue d'ldalie,6
+        category: Category
+        city: Brussels
+        country: Belgium
+        email: jcc@cuvelier.be
+        fName: Jean-Christophe
+        jobTitle: Partner
+        lName: Cuvelier
+        optIn: Opt in
+        organization: Morris & Chapman Belgium
+        password: Password
+        phone: 3225502026
+        plain_password: Password Again
+        postalCode: 1050
+        title: Mr, Ms, Dr, ...
+        username: Username
+        
+emt_main_page:
+    forgot: Forgot your password?
+    login: Sign in
+    login_description: In order to submit a conference, you must first register or sign in using your existing details.
+    not_registered: Not yet registered?
+    not_registered_description: This step allows you to create a profile which will enable you to submit conferences or review the status of your conferences in the future.
+    registered: Already registered?
+    register_now: Register now
+    remember: Remember
+    username_or_email: Username or E-Mail
+
+#form confernece
+conference:
+    edit:
+        name: Name of the conference
+        name_ph: Insert official name of event
+        acronym: Acronym of the conference
+        acronym_ph:
+        therapeuticArea: Therapeutic area
+        therapeuticArea_ph: Therapeutic area
+        therapeuticAreaOther: Other therapeutic area 
+        organizingCompaniesNames: Name of Conference Organizing Party(ies)
+        organizingCompaniesNames_ph: Insert name(s) of contact person(s). If not available, select "N/A"
+        contactPersonsNames: Name(s) of contact person(s)
+        organizingCompaniesNames_ph: 
+        organizingEmails: Organiser’s e-mail address
+        organizingEmails_ph: Insert only ONE email
+        website: Website of the conference
+        website_ph: Insert official website of event (please include http://)
+        email: General e-mail address of the conference
+        delegatesMoreThan1Country: Will participants to the conference be coming from more than one country?
+        delegatesCountries: Please list the countries of origin of participants
+        delegatesAnticipatename: How many participants do you anticipate for the conference?
+        assesmentNameVenue: Name of venue
+        assesmentNameVenue_ph: specify name of venue
+        assesmentCategoryVenue: Category of venue
+        assesmentCategoryVenue_ph: Hotel, Conference Centre, …
+        assesmentCity: City/Town
+        assesmentCity_ph: city of conference
+        assesmentCountry: Country
+        assesmentLocalNA: Local national association
+        assesmentLocalNA_ph: local national association
+        assesmentProposedAccomodation: Proposed accommodation
+        assesmentProposedAccomodation_ph: proposed accommodation
+        assesmentProposedAccomodationDocument: Proposed accommodation (document)
+        eventProgramme: Event programme
+        eventProgramme_ph: Insert link to programme (please include http://)
+        comments: Other comments
+#        autopublishing: Please check this box if you would like for the decision on your pre-clearance, if approved, to be published on the Ethical Medtech website
+        autopublishing: Please check this box if you would like the Pre-Clearance decision, if approved, to be published on EthicalMedTech calendar
+        archive: Archive conference
+        status: Status of the event
+        statusText: Notes/Remarks
+#/form confernece
+
+# Password resetting
+resetting:
+    password_already_requested: The password for this user has already been requested within the last 24 hours.
+    check_email: An email has been sent to %email%. It contains a link you must click to reset your password.
+    request:
+        invalid_username: The username or email address "%username%" does not exist.
+        username: "Username or email address:"
+        forgot: Forgot your password?
+        you_email: "Email address"
+        forgot_msg: Do not worry, we can help you get back in to your account safely! Fill out the form below to request an e-mail with information on how to reset your password.
+        submit: Request
+    reset:
+        submit: Change password
+    flash:
+        success: The password has been reset successfully
+    email:
+        subject: Reset Password
+        message: |
+            Hello %username%!
+
+            To reset your password - please visit %confirmationUrl%
+
+            Sincerely,
+            EthicalMedTech.
+            
+# Form field labels
+form:
+    group_name: "Group name:"
+    username: "Username:"
+    email: "Email:"
+    current_password: "Current password"
+    password: "Password:"
+    password_confirmation: "Repeat password:"
+    new_password: "Password"
+    new_password_confirmation: "Password again"
+
+# Password change
+change_password:
+    submit: Change
+    info: Enter your new password in the form below.
+    hello: Hello %username%
+    flash:
+        success: The password has been changed
+
+
+# Group
+group:
+    edit:
+        submit: Update group
+    show:
+        name: Group name
+    new:
+        submit: Create group
+    flash:
+        updated: The group has been updated
+        created: The group has been created
+        deleted: The group has been deleted
+
+# Security
+security:
+    login:
+        username: "Username:"
+        password: "Password:"
+        remember_me: Remember me
+        submit: Login
+
+# Profile
+profile:
+    show:
+        username: Username
+        email: Email
+    edit:
+        submit: Update
+    flash:
+        updated: The profile has been updated9
+
+# Registration
+registration:
+    check_email: An email has been sent to %email%. It contains an activation link you must click to activate your account.
+    confirmed: Congrats %username%, your account is now activated.
+    back: Back to the originating page.
+    submit: Register
+    flash:
+        user_created: p
+    email:
+        subject: Welcome %username%!
+        message: |
+            Hello %username%!
+
+            To finish activating your account - please visit %confirmationUrl%
+
+            Sincerely,
+            EthicalMedTech.
+            
+# Global strings
+layout:
+    logout: Logout
+    login: Login
+    register: Register
+    logged_in_as: Logged in as %username%
+
+# Form field labels
+form:
+    group_name: "Group name:"
+    username: "Username:"
+    email: "Email:"
+    current_password: "Current password:"
+    password: "Password:"
+    password_confirmation: "Repeat password:"
+    new_password: "New password:"
+    new_password_confirmation: "Repeat new password:"
+
+
+criteria_status_comment: add comment

@@ -1,0 +1,73 @@
+<style type="text/css">
+    .emt-pdf {
+        width: 700px;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        padding: 0px;
+        margin: 0px;
+    }
+    .emt-pdf p.emt-pdf-head {
+        color: #003c73;
+        margin: 0px;
+        padding: 0px;
+        word-wrap: break-word;
+    }
+    .emt-pdf p strong {
+        color: #1192d1;
+        word-wrap: break-word;
+    }
+</style>
+<table class="emt-pdf" cellpadding="0px" cellspacing="0px" border="0px">
+    <tr>
+        <td rowspan="2" style="padding: 20px 30px;">
+            <img src="resources/images/logo.jpg" alt="Logo EthicalMedTech"/>
+        </td>
+        <td valign="bottom">
+            <p class="emt-pdf-head">Rue Joseph II, 40</p>
+        </td>
+        <td valign="bottom">
+            <p class="emt-pdf-head"><strong>Tel.:</strong> +32 (0) 2 772 22 12</p>
+        </td>
+    </tr>
+    <tr>
+        <td valign="top">
+            <p class="emt-pdf-head">B - 1000 Brussels, Belgium</p>
+        </td>
+        <td valign="top">
+            <p class="emt-pdf-head"><strong>Fax:</strong> +32 (0) 2 771 39 39</p>
+        </td>
+    </tr>
+    {% if messages is empty%}
+    <tr>
+        <td colspan="3">
+            No messages yet.
+        </td>
+    </tr>
+    {% endif %}
+    
+    {% for message in messages %}
+        <tr>
+            <td colspan="3" style="padding: 20px 30px; color: #595959;">
+                <div class="info">
+                    <strong>Sent from: </strong>{{message.sender|raw}}, <strong>to</strong> {{message.mailto |raw}} <strong>on</strong> {{message.createdAt|date("m/d/Y")}} 
+                </div>
+                <div class="message">
+                    <h3>{{message.subject|raw}}</h3>
+                    <div>{{message.content|raw}}</div>
+                </div>
+                <br><br>
+                <div>
+                {% if message.documents|length > 0 %}<strong>Added files:</strong> {% endif %}
+                {% for document in message.documents %}
+                    <br>{{ document.createdAt|date("y-m-d h:i") }}<br>
+                    {{ document.targetAsText }}<br>
+                    <a href="/{{ document.webPath }}" target="_blank" download>{{ document.name }}</a><br>
+                    <strong>{{ document.comment }}</strong>
+                {% endfor %}
+                </div>
+                <hr width="98%" size="1px" color="#414141" >
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+

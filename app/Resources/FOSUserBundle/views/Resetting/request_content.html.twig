@@ -1,0 +1,21 @@
+{% trans_default_domain 'OSSystemEMTBundle' %}
+
+<form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
+    <div class="registration-form fos_user_change_pass">
+        <fieldset>
+            <legend><span>{{ 'resetting.request.forgot'|trans }}</span></legend>
+            <p>{{ 'resetting.request.forgot_msg'|trans }}</p>
+            {% if invalid_username is defined %}
+                <p class="error-message">{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}</p>
+            {% endif %}
+            <div>
+                <label for="forgot_password_email_address" class="form-row">{{ 'resetting.request.you_email'|trans }}</label>
+                <input type="text" name="username" id="forgot_password_email_address">
+            </div>
+            <div>
+                <label> </label>
+                <input type="submit" name="change" value="{{ 'resetting.request.submit'|trans }}">
+            </div>
+        </fieldset>
+    </div>
+</form>

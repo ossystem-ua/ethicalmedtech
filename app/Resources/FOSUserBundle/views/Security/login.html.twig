@@ -1,0 +1,15 @@
+{% extends 'base.html.twig'  %}
+{% trans_default_domain 'OSSystemEMTBundle' %}
+
+{% block banner %}{% endblock %}
+{% block nav %}{% endblock %}
+
+{% if newUser is not defined  %}
+    {% set newUser = false %}
+{% endif %}
+
+{% block SignIn %}
+    <div class="banner-home">
+        {% include "FOSUserBundle:Security:loginForm.html.twig" %}
+    </div>
+{% endblock %}

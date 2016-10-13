@@ -1,0 +1,55 @@
+{% trans_default_domain 'OSSystemEMTBundle' %}
+
+<div class="registration-form register">
+    <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+    <fieldset>
+        <div class="title"><span>{{'emt_register'|trans}}</span></div>
+        <br />
+        <!--[if lte IE 8]>
+            <h2>Register</h2>
+        <![endif]-->
+        <p>{{'emt_register_description'|trans}}</p>
+        <div>
+            <div class="errors_registration">{{ form_errors(form.fName) }}</div>
+            {{ form_label(form.fName) }}
+            {{ form_widget(form.fName) }}
+        </div>
+        
+        <div>
+            <div class="errors_registration">{{ form_errors(form.lName) }}</div>
+            {{ form_label(form.lName) }}
+            {{ form_widget(form.lName) }}
+        </div>
+        
+        <div>
+            <div class="errors_registration">{{ form_errors(form.email) }}</div>
+            {{ form_label(form.email) }}
+            {{ form_widget(form.email) }}
+        </div>
+        
+        <div>
+            <div class="errors_registration">{{ form_errors(form.username) }}</div>
+            {{ form_label(form.username) }}
+            {{ form_widget(form.username) }}
+        </div>
+        
+        <div>
+            <div class="errors_registration">{{ form_errors(form.plainPassword.first) }}</div>
+            {{ form_label(form.plainPassword.first) }}
+            {{ form_widget(form.plainPassword.first) }}
+        </div>
+        
+        <div>
+            <div class="errors_registration">{{ form_errors(form.plainPassword.second) }}</div>
+            {{ form_label(form.plainPassword.second) }}
+            {{ form_widget(form.plainPassword.second) }}
+        </div>
+        <div>
+            <label></label>
+            <input type="submit" value="Register" name="register" />
+        </div>        
+    </fieldset>
+  {{ form_rest(form) }}
+    </form>
+  </div>
+

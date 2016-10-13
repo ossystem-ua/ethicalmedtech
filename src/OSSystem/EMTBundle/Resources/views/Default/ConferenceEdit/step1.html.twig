@@ -1,0 +1,242 @@
+{% extends 'base.html.twig'  %}
+{% trans_default_domain "OSSystemEMTBundle" %}
+
+{% block nav %}
+    {% include "OSSystemEMTBundle:Default:widgets/topmenu.html.twig" %}
+{% endblock %}
+
+
+
+{% block content %}
+
+    <h1 class="clear">Conference information</h1>
+    
+{% include "OSSystemEMTBundle:Default:widgets/conferenceTabs.html.twig" %}
+    
+
+<h2 class="clear">Conference information</h2>
+
+<div class="clear"></div>
+
+<div class="registration-form">
+    
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    
+    <div style="clear"></div>
+
+    <div class="content-box">
+        
+        <div class="form_row {% if not conference.isPreClearance %}hidden{% endif %}">
+            <div class="question_field">
+                {{ form_widget(form.autopublishing, {'attr': {'class': 'mt-10'}}) }}
+                {{ form_label(form.autopublishing, null, {'label_attr': {'class': 'w-500'}}) }}
+                
+                <div class="question_error">{{ form_errors(form.autopublishing) }}</div>
+            </div>
+        </div>            
+    
+        {% if conference.isPreClearance %}
+            <fieldset style="margin-bottom: 50px;">
+            <p>Pre-clearance will only be accepted if information on the mandatory following criteria is available.</p>
+            <ul>
+                    <li>Geographic location</li>
+                    <li>Conference facility venue</li>
+            </ul>
+            </fieldset>
+
+            <div style="clear"></div>
+        {% endif %}
+        <div style="clear"></div>
+        
+        <div class="form_row">
+            <div class="question_field">
+                {{ form_label(form.title) }}
+                {{ form_widget(form.title, { 'attr': {'class': 'validate[required]'} }) }}
+                <div class="question_error">{{ form_errors(form.title) }}</div>
+            </div>
+        </div>
+            
+        <div class="form_row">
+            <div class="question_field">
+                {{ form_label(form.acronym) }}
+                {{ form_widget(form.acronym) }}
+                <div class="question_error">{{ form_errors(form.acronym) }}</div>
+            </div>
+        </div>
+            
+        <div class="form_row">
+            <div class="question_field">
+                {{ form_label(form.therapeuticArea) }}
+                {{ form_widget(form.therapeuticArea, { 'attr': {'class': 'validate[required]'} }) }}
+                <div class="question_error">{{ form_errors(form.therapeuticArea) }}</div>
+            </div>
+        </div>
+            
+        <div class="form_row">
+            <div class="question_field">
+                {{ form_label(form.therapeuticAreaOther) }}
+                {{ form_widget(form.therapeuticAreaOther) }}
+                <div class="question_error">{{ form_errors(form.therapeuticAreaOther) }}</div>
+            </div>
+        </div>
+        <div class="form_row">
+            <div class="question_field">
+                {{ form_label(form.startConferenceDate) }}
+                {% if "ME" == countryes.location and 0 == mindays %}
+                    {{ form_widget(form.startConferenceDate, {'type':'text', 'attr': {'class': 'date datepicker validate[required,custom[date],past[' ~ maxdate| date('d.m.Y') ~ ']]'} }) }}
+                {% else %}
+                    {{ form_widget(form.startConferenceDate, {'type':'text', 'attr': {'class': 'date datepicker validate[required,custom[date],future[' ~ mindate| date('d.m.Y') ~ '],past[' ~ maxdate| date('d.m.Y') ~ ']]'} }) }}
+                {% endif %}
+                <div class="question_error">{{ form_errors(form.startConferenceDate) }}</div>
+            </div>
+            
+            
+        </div>
+            
+        <div class="form_row">
+            <div class="question_field">
+                {{ form_label(form.endConferenceDate) }}
+                {% if "ME" == countryes.location and 0 == mindays %}
+                    {{ form_widget(form.endConferenceDate, {'type':'text', 'attr': {'class': 'date datepicker validate[required,custom[date],future[#ossystem_emtbundle_conference_startConferenceDate],past[' ~ maxdate| date('Y-m-d') ~ ']]'} }) }}
+                {% else %}
+                    {{ form_widget(form.endConferenceDate, {'type':'text', 'attr': {'class': 'date datepicker validate[required,custom[date],future[#ossystem_emtbundle_conference_startConferenceDate],past[' ~ maxdate| date('Y-m-d') ~ ']]'} }) }}
+                {% endif %}
+                <div class="question_error">{{ form_errors(form.endConferenceDate) }}</div>
+            </div>
+        </div>
+            
+        <div class="form_row">
+            <div class="question_field">
+                {{ form_label(form.organizingCompaniesNames) }}
+                {{ form_widget(form.organizingCompaniesNames, { 'attr': {'class': 'validate[required]'} }) }}
+                <div class="question_error">{{ form_errors(form.organizingCompaniesNames) }}</div>
+            </div>
+        </div>
+            
+        <div class="form_row">
+            <div class="question_field">
+                {{ form_label(form.contactPersonsNames) }}
+                {{ form_widget(form.contactPersonsNames, { 'attr': {'class': 'validate[required]'} }) }}
+                <div class="question_error">{{ form_errors(form.contactPersonsNames) }}</div>
+            </div>
+        </div>
+            
+        <div class="form_row">
+            <div class="question_field">
+                {{ form_label(form.organizingEmails) }}
+                {{ form_widget(form.organizingEmails, { 'attr': {'class': 'validate[required,custom(email)]'} }) }}
+                <div class="question_error">{{ form_errors(form.organizingEmails) }}</div>
+            </div>
+        </div>
+            
+        <div class="form_row">
+            <div class="question_field">
+                {{ form_label(form.website) }}
+                {{ form_widget(form.website) }}
+                <div class="question_error">{{ form_errors(form.website) }}</div>
+            </div>
+        </div>
+            
+    {#Step 3 merge#}        
+    <div style="clear"></div>
+
+        <div class="form_row">
+            <div class="question_field">
+                {{ form_label(form.assesmentNameVenue) }}
+                {{ form_widget(form.assesmentNameVenue) }}
+                <div class="question_error">{{ form_errors(form.assesmentNameVenue) }}</div>
+            </div>
+        </div>
+            
+        <div class="form_row">
+            <div class="question_field">
+                {{ form_label(form.assesmentCategoryVenue) }}
+                {{ form_widget(form.assesmentCategoryVenue) }}
+                <div class="question_error">{{ form_errors(form.assesmentCategoryVenue) }}</div>
+            </div>
+        </div>
+            
+        <div class="form_row">
+            <div class="question_field">
+                {{ form_label(form.assesmentCity) }}
+                {{ form_widget(form.assesmentCity) }}
+                <div class="question_error">{{ form_errors(form.assesmentCity) }}</div>
+            </div>
+        </div>
+
+            
+        <div class="form_row">
+            <div class="question_field">
+                {{ form_label(form.assesmentCountry) }}
+                {{ form_widget(form.assesmentCountry, { 'attr': {'class': 'validate[required]'} }) }}
+                <div class="question_error">{{ form_errors(form.assesmentCountry) }}</div>
+            </div>
+        </div>
+            
+        <div class="form_row">
+            <div class="question_field">
+                {{ form_label(form.assesmentLocalNA) }}
+                {{ form_widget(form.assesmentLocalNA) }}
+                <div class="question_error">{{ form_errors(form.assesmentLocalNA) }}</div>
+            </div>
+        </div>
+            
+        <div class="form_row">
+            <div class="question_field">
+                {{ form_label(form.assesmentProposedAccomodation) }}
+                {{ form_widget(form.assesmentProposedAccomodation) }}
+                <div class="question_error">{{ form_errors(form.assesmentProposedAccomodation) }}</div>
+            </div>
+        </div>
+            
+        <div class="form_row">
+            <div class="question_field">
+                {{ form_label(form.assesmentProposedAccomodationDocumentFile) }}
+                
+                {% if conference.assesmentProposedAccomodationDocument %}
+                    <a href="/{{ conference.assesmentProposedAccomodationDocument.webPath }}" target="_blank" download>Download the document</a>
+                {% endif %}
+                
+                {{ form_widget(form.assesmentProposedAccomodationDocumentFile) }}
+                <div class="question_error">{{ form_errors(form.assesmentProposedAccomodationDocumentFile) }}</div>
+            </div>
+        </div>
+    
+    </div>
+    
+    <input type="submit" value="Continue" />
+    
+    {{ form_end(form) }}
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $("#ossystem_emtbundle_conference_assesmentCountry [value='{{ country }}']").attr("selected", "selected");
+    });
+    </script>
+</div>    
+    
+
+    
+{% endblock %}
+
+
+{% block editScripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('resources/js/stepedit.js') }}"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function(){
+            jQuery('#ossystem_emtbundle_conference_startConferenceDate').change(function(){
+                var startDate = jQuery("#ossystem_emtbundle_conference_startConferenceDate").val();
+                var SD = startDate.split(".");
+                    sDay = SD[0],
+                    sMonth = SD[1],
+                    sYear = SD[2],
+                    maxDate = {{maxdate| date('Y-m-d')}};
+
+                    jQuery("#ossystem_emtbundle_conference_endConferenceDate").removeClass();
+                    jQuery("#ossystem_emtbundle_conference_endConferenceDate").addClass("date datepicker validate[required,custom[date],future["+sYear+"-"+sMonth+"-"+sDay+"],pastpast["+maxDate+"]] hasDatepicker placeholder-style");
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,32 @@
+<p>Dear {{ conf.user.fName }} {{ conf.user.lName }},</p>
+<p>I refer to your Pre-Clearance request dated {{ conf.startConferenceDate|date('d/m/Y') }} related to the 
+{{ conf.title }}  from {{ conf.startConferenceDate|date('d/m/Y') }} to {{ conf.endConferenceDate|date('d/m/Y') }} in {{ conf.assesmentCity }}, {{ conf.assesmentCountry }}
+(herewith referred to as the “Conference”). You have requested that we provide you with our 
+decision as to whether or not the following criteria are compliant with the Eucomed Code of Ethical Business Practice:</p>
+<p>{{ conf.conferenceStatusText|raw }}</p>
+<p>I am pleased to inform you that following our assessment, we have determined that the submitted criteria are:
+<span style="color: green;text-decoration: underline;font-weight: bold;" >COMPLIANT</span>, therefore 
+<span style="color: green;text-decoration: underline;font-weight: bold;" >PRE-CLEARED</span> subject to the following:</p>
+<p>a. In rendering this decision, we have relied on the documents and information which have been provided to us.  
+    We have not independently verified the accuracy of this information or documents, nor have we determined whether they are up-to-date.</p>
+<p>b. This decision does not take into account national or local laws, 
+    regulations or professional or company codes that may impose more stringent requirements. </p>
+<p>Please note that Pre-Clearance is preliminary only. A final decision as to appropriateness 
+    of the conference for sponsorship of HCPs by Eucomed member is subject to a review by the 
+    Compliance Officer of additional information which must be submitted via the Ethicalmedtech online 
+    form at least 75 days criteria prior to the conference starting date. This additional information 
+    relates to the conference programme (under the format of a timetable, indicating for each session 
+    hour the session title and faculty names), registration package benefits, entertainment and social 
+    activities (if any). Provided that the additional information submitted is complete, the 
+    Compliance Officer will then make a final assessment as to whether or not the conference is compliant 
+    with the Eucomed Code of Ethical Business Practice and therefore approved for sponsorship of HCPs by Eucomed members.</p>
+<p>Members of Eucomed and of national associations affiliated with Eucomed may not sponsor or cover
+    expenses of Healthcare Professionals to attend conferences organised by medical societies,
+    professional conference organisers or other third parties unless the conference is in compliance
+    with the Eucomed Code of Ethical Business Practice. </p>
+<p>This information will be posted on <a href="http://www.ethicalmedtech.eu">www.ethicalmedtech.eu</a> 
+    only if you have selected the option in your application form.</p>
+<br />
+<p>Sincerely,<br />
+{{signature}}<br />
+Compliance Officer</p>

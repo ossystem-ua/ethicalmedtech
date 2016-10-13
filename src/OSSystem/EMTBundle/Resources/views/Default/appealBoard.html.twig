@@ -1,0 +1,17 @@
+{% extends 'base.html.twig'  %}
+{% trans_default_domain "OSSystemEMTBundle" %}
+
+{% block nav %}
+    {% include "OSSystemEMTBundle:Default:widgets/topmenu.html.twig" %}
+{% endblock %}
+
+
+{% block content %}
+ {{ tinymce_init() }}
+ 
+{% include "OSSystemEMTBundle:Default:widgets/messagesList.html.twig" with {'messages': messages } %}
+
+{% include "OSSystemEMTBundle:Default:widgets/messageAddForm.html.twig" with {'formAddMessage': formAddMessage } %}
+
+
+{% endblock %}

@@ -1,0 +1,14 @@
+OSSysetm\EMTBundle\Entitfdfy\Conference:
+    properties:
+        email:
+            - Email:
+                message: The email "{{ value }}" is not a valid email.
+                strict: false
+        website:
+            - Regex:
+                pattern: "/^htt(.+)$/i"
+                htmlPattern: "^htt(.+)$"
+        eventProgramme:
+            - Regex:
+                pattern: "/^htt(.+)$/i"
+                htmlPattern: "^htt(.+)$"

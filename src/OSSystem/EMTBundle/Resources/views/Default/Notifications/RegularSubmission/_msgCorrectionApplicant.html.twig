@@ -1,0 +1,12 @@
+<p>Dear {{ conf.user.fName }} {{ conf.user.lName }},</p>
+<p>With regards to the ref.EMT{{ conf.id }} - {{ conf.title }} on {{ conf.startConferenceDate|date('d.m.Y') }} in
+{{ conf.assesmentCity }}, {{ conf.assesmentCountry }} you have submitted for assessment, please note that some non-compliant criteria have been
+identified during the initial assessment.<br />
+We have sent a correction notice to the conference organizer today,
+inviting them to send to us via email documentation which clearly show that appropriate
+corrective action has been taken to make the Conference compliant with the Eucomed Code of Ethical Business Practice.</p>
+<p>Please note that we allow a 10 business day window, meaning up to {{ "now"|date_modify("+10 day")|date("d.m.Y") }} for conference organizers to take those actions. <br />
+If I do not receive that documentation by then, I will issue a final non-compliant decision
+for the Conference that will be posted on <a href="http://www.ethicalmedtech.eu">www.ethicalmedtech.eu</a>.</p><br />
+<p>Sincerely,<br/>
+{{ signature }}</p>

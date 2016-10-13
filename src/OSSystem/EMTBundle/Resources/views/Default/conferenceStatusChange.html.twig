@@ -1,0 +1,54 @@
+{% extends 'base.html.twig'  %}
+{% trans_default_domain "OSSystemEMTBundle" %}
+
+{% block nav %}
+    {% include "OSSystemEMTBundle:Default:widgets/topmenu.html.twig" %}
+{% endblock %}
+
+
+{% block content %}
+    
+    <div class="registration-form">
+        
+        {{ form_start(form) }}
+        
+  <fieldset>
+      <legend><span>Change the status of the event</span></legend>
+      <!--[if lte IE 8]>
+          <h2>Event - General Details</h2>
+      <![endif]-->
+      <div class="form_row">
+          <div class="question_field event-status">
+            {{ form_row(form.conferenceStatus) }}
+          </div> 
+      </div>
+      <div class="question_field event-sub-status">
+            <label for="conference_sub_status">Sub status</label>
+            <select name="sub_status" id="conference_sub_status">
+                <option value="0"> </option>
+                <option value="Less than 75 days">Less than 75 days</option>
+                <option value="Outside of the Scope">Outside of the Scope</option>
+                <option value="Insufficient information">Insufficient information</option>
+            </select>
+            (Only if "Not Assessed" is selected)
+
+       </div>
+            
+    {{ tinymce_init() }}
+      <div class="form_row">
+          <div class="question_field">      
+            {{ form_label(form.conferenceStatusText) }}  
+            {{ form_errors(form.conferenceStatusText) }}  
+          </div>
+          <div class="question_field">      
+            {{ form_widget(form.conferenceStatusText) }}
+          </div> 
+      </div>
+
+  </fieldset>
+  <input type="submit" name="submit" value="Change status" />
+
+  {{ form_end(form) }}
+</div>
+    
+{% endblock %}

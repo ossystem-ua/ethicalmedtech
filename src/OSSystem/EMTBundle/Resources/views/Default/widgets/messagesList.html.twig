@@ -1,0 +1,31 @@
+<div class="content-box">
+    {% if messages is empty%}
+        No messages yet.
+    {% endif %}
+    <ul>
+        {% for message in messages %}
+        <li>
+            <div class="info">
+                <strong>Sent from: </strong>{{message.sender|raw}}, <strong>to</strong> {{message.mailto |raw}} <strong>on</strong> {{message.createdAt|date("m/d/Y")}} 
+            </div>
+            <div class="message">
+            <h3>{{message.subject|raw}}</h3>
+                {{message.content|raw}}
+            </div>
+            <div>
+            {% if message.documents|length > 0 %}<strong>Added files:</strong> {% endif %}
+            {% for document in message.documents %}
+                <div class="clearfix padding-5 hr">            
+                    <div class="filedate left pr-20">{{ document.createdAt|date("y-m-d h:i") }}</div>
+                    <div class="w-100 left pr-20">{{ document.targetAsText }}</div>
+                    <div class="left w-350"><a href="/{{ document.webPath }}" target="_blank" download>{{ document.name }}</a></div>
+                    <div class="left"><strong>{{ document.comment }}</strong></div>
+                </div>
+                            
+            {% endfor %}
+            </div>
+            
+        </li>
+        {% endfor %}
+    </ul>
+</div>

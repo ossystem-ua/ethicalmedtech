@@ -1,0 +1,9 @@
+{% extends '::base.html.twig' %}
+
+{% trans_default_domain 'OSSystemEMTBundle' %}
+
+{% block content %}
+
+{{'emt_registration.confirmed' | trans({'%sign_in%': 'Sign in', '%path%': path('os_system_emt_home') } ) | raw }}   
+
+{% endblock %}

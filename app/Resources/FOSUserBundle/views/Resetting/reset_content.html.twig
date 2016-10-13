@@ -1,0 +1,17 @@
+{% trans_default_domain 'OSSystemEMTBundle' %}
+
+<form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_change_pass">
+    <div class="registration-form fos_user_change_pass">
+        <fieldset>
+{#            <legend><span>{{ 'change_password.hello' |trans({'%username%': username }) }}</span></legend>#}
+            <p>{{ 'change_password.info'|trans }}</p>
+            <div>
+                {{ form_widget(form) }}
+            </div>
+            <div>
+                <label> </label>
+                <input type="submit" value="{{ 'change_password.submit'|trans }}" />
+            </div>
+        </fieldset>
+    </div>
+</form>

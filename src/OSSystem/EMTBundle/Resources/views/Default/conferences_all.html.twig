@@ -1,0 +1,132 @@
+{% extends 'base.html.twig'  %}
+{% trans_default_domain "OSSystemEMTBundle" %}
+
+{% block nav %}
+    {% include "OSSystemEMTBundle:Default:widgets/topmenu.html.twig" %}
+{% endblock %}
+
+
+{% block content %}
+<div class="put-right">
+    
+  <a class="event-button" href="/conferences/terms"><span>Submit an event</span></a>
+  {% set filterstring="filter=1" %}
+  {% if filter['id'] is defined %}
+      {% set filterstring = filterstring ~ "&filter_id="~filter['id'] %}
+  {% endif %}
+  {% if filter['name'] is defined %}
+      {% set filterstring = filterstring ~ "&filter_name="~filter['name'] %}
+  {% endif %}
+  {% if filter['city'] is defined %}
+      {% set filterstring = filterstring ~ "&filter_city="~filter['city'] %}
+  {% endif %}
+  {% if filter['status'] is defined %}
+      {% set filterstring = filterstring ~ "&filter_status="~filter['status'] %}
+  {% endif %}
+  {% if filter['area'] is defined %}
+      {% set filterstring = filterstring ~ "&filter_area="~filter['area'] %}
+  {% endif %}
+  
+  <a class="event-button" href="{{ path("os_system_emt_export_tbs")}}?{{ filterstring }}"><span>Export to Excel</span></a>
+</div>
+    {% if arch %}
+        <h1>{{ "emt_conf_archives"|trans }}</h1>
+    {% elseif dblentries %}
+        <h1>Double entries</h1>
+    {% else %}
+        <h1>{{ "emt_conf_all"|trans }}</h1>    
+    {% endif %}
+<div class="clear"></div>
+
+    <div class="filters registration-form filters-form">
+      <form class="form" action="" method="post">
+          <fieldset>
+          <div class="form_row">
+                        <label for="conference_filters_id">Reference (without EMT)</label>
+                        <input type="text" id="conference_filters_id" name="filters_id" {% if filter['id'] is defined %} value="{{ filter['id']}}"{%endif%}><br>
+                    </div>
+            <div class="form_row">
+                <label for="conference_filters_name">Name</label>
+                <input type="text" id="conference_filters_name" name="filters_name" {% if filter['name'] is defined %} value="{{ filter['name']}}"{%endif%} ><br>
+            </div>
+            <div class="form_row">
+                <label for="conference_filters_venue_city">Venue city</label>
+                <input type="text" id="conference_filters_venue_city" name="filters_city" {% if filter['city'] is defined %} value="{{ filter['city']}}"{%endif%} ><br>
+            </div>
+            {% if not dblentries %}
+                          <div class="form_row">
+                            <label for="conference_filters_status">Status</label>
+                            <select name="filters_status" id="conference_filters_status">
+                                <option value=""></option>
+                                {% for status in statuses %}
+                                    {% if filter['status'] is defined %}
+                                        <option value="{{ status.id }}" {%if status.id in filter['status']%}selected="selected"{%endif%}>{{ status.title }}</option>
+                                    {% else %}
+                                        <option value="{{ status.id }}" >{{ status.title }}</option>
+                                    {% endif %}                                      
+                                {% endfor%}
+                              </select>
+                          </div>
+            {% endif %}
+                              <div class="form_row">
+                                  <label for="conference_filters_medical_area">Medical area</label>
+                                     <select name="filters_area" id="conference_filters_medical_area">
+                                        <option value=""></option>
+                                          {% for area in areas %}
+                                            {% if filter['area'] is defined %}
+                                                <option value="{{ area.id }}" {%if area.id in filter['area']%}selected="selected"{%endif%}>{{ area.title}}</option>
+                                            {% else %}
+                                                <option value="{{ area.id }}" >{{ area.title }}</option>
+                                            {% endif %}
+                                          {% endfor%}
+                                      </select>
+                              </div>
+                    </fieldset>
+                                      <input type="submit" value="Search" class="button_search">
+                                      <a class="clear_button" href="{{ path("os_system_emt_conference_all") }}">Clear search</a>
+      </form>
+    </div>
+    <div class="clear"></div>
+    <br />
+    <div class="content-box">
+        {% for conference in conferences %}
+            {% if (conference.title is not null and conference.country is not null and conference.organizingEmails is not null) %}
+                <ul>
+                    <li>
+                        <div class="left-content emt-left-box-max-width">
+                          <h3>{{conference.title}} ({{ conference.country }})</h3>
+                          <h4>Ref. EMT{{conference.id}} - Submitted on {{ conference.submissionDate | date('d M Y')}}</h4>
+                          <div class="date">From {{ conference.startConferenceDate | date('d M Y')}} to {{ conference.endConferenceDate | date('d M Y')}}</div>
+                          <div>
+                            <p>City/town : {{ conference.assesmentCity }}</p>
+                            <p>Submitter email : 
+                                <a href="mailto:{% if conference.altEmail %}{{ conference.altEmail }}{% else %}{{ conference.organizingEmails }}{%endif%}">
+                                    {% if conference.altEmail %}{{ conference.altEmail }}{% else %}{{ conference.organizingEmails }}{%endif%}
+                                </a>
+                            </p>
+                            <p>
+                              <strong>Status:</strong> <span class="conference-status-{% if conference.status == null %}0{% else %}{{ conference.statusId }}{% endif %}">{{ conference.status }}</span> - <strong>Visibility:</strong> 
+                              {% if(conference.isPublished == 1) %} Published {% else %} Unpublished {% endif %}
+                            </p>
+                          </div>
+                        </div>
+                        <div class="right-content">
+                            {% if conference.organizingEmails is not null and conference.country is not null %}
+                                <a href="{{ path("os_system_emt_conference_view", {"conferenceId": conference.id})}}" class="button blue"><span class="arrow">View</span></a>
+                            {% endif %}
+                            <a href="{{ path("os_system_emt_conference_edit_officer", {"conferenceId": conference.id})}}" class="button green"><span class="arrow">Edit</span></a>
+                            {% if conference.statusId in [20] and app.user.profileType in [3,4]  %}
+                                <a href="{{ path("os_system_emt_conference_appeal", {"conferenceId": conference.id})}}" class="button blue"><span class="arrow">Appeal Board</span></a>
+                            {% endif %}
+                        </div>
+                    </li>
+                </ul>
+            {% endif %}
+        {% else %}
+            No conferences matches your criterias.
+        {% endfor %}
+    </div>
+ 
+    
+</div>
+{% endblock %}

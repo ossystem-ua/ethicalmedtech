@@ -1,0 +1,237 @@
+{% extends 'base.html.twig'  %}
+{% trans_default_domain "OSSystemEMTBundle" %}
+
+{% block nav %}
+    {% include "OSSystemEMTBundle:Default:widgets/topmenu.html.twig" %}
+{% endblock %}
+
+{% block content %}
+
+    <h1 class="clear">Edit Conference</h1>
+ {% include "OSSystemEMTBundle:Default:widgets/conferenceTabs.html.twig" %}
+
+<div class="clear"></div>
+
+<div class="registration-form">
+    
+    {{ form_start(form, {'multipart':true}) }}
+    {{ form_errors(form) }}
+    
+    <div style="clear"></div>
+
+    <div class="content-box">
+        
+        <div class="form_row {% if 'title' in conference.changedFields %}field-changed{% endif %}">
+            <div class="question_field">
+                {{ form_label(form.title) }}
+                {{ form_widget(form.title) }}
+                <div class="question_error">{{ form_errors(form.title) }}</div>
+            </div>
+        </div>
+            
+        <div class="form_row {% if 'acronym' in conference.changedFields %}field-changed{% endif %}">
+            <div class="question_field">
+                {{ form_label(form.acronym) }}
+                {{ form_widget(form.acronym) }}
+                <div class="question_error">{{ form_errors(form.acronym) }}</div>
+            </div>
+        </div>
+            
+        <div class="form_row {% if 'therapeuticArea' in conference.changedFields %}field-changed{% endif %}">
+            <div class="question_field">
+                {{ form_label(form.therapeuticArea) }}
+                {{ form_widget(form.therapeuticArea) }}
+                <div class="question_error">{{ form_errors(form.therapeuticArea) }}</div>
+            </div>
+        </div>
+            
+        <div class="form_row {% if 'therapeuticAreaOther' in conference.changedFields %}field-changed{% endif %}">
+            <div class="question_field">
+                {{ form_label(form.therapeuticAreaOther) }}
+                {{ form_widget(form.therapeuticAreaOther) }}
+                <div class="question_error">{{ form_errors(form.therapeuticAreaOther) }}</div>
+            </div>
+        </div>
+            
+        <div class="form_row {% if 'startConferenceDate' in conference.changedFields %}field-changed{% endif %}">
+            <div class="question_field">
+                {{ form_label(form.startConferenceDate) }}
+                {{ form_widget(form.startConferenceDate, {'type':'text'}) }}
+                
+                <div class="question_error">{{ form_errors(form.startConferenceDate) }}</div>
+            </div>
+        </div>
+            
+        <div class="form_row {% if 'endConferenceDate' in conference.changedFields %}field-changed{% endif %}">
+            <div class="question_field">
+                {{ form_label(form.endConferenceDate) }}
+                {{ form_widget(form.endConferenceDate, {'type':'text'}) }}
+                
+                <div class="question_error">{{ form_errors(form.endConferenceDate) }}</div>
+            </div>
+        </div>
+            
+        <div class="form_row {% if 'organizingCompaniesNames' in conference.changedFields %}field-changed{% endif %}">
+            <div class="question_field">
+                {{ form_label(form.organizingCompaniesNames) }}
+                {{ form_widget(form.organizingCompaniesNames) }}
+                <div class="question_error">{{ form_errors(form.organizingCompaniesNames) }}</div>
+            </div>
+        </div>
+            
+        <div class="form_row {% if 'contactPersonsNames' in conference.changedFields %}field-changed{% endif %}">
+            <div class="question_field">
+                {{ form_label(form.contactPersonsNames) }}
+                {{ form_widget(form.contactPersonsNames) }}
+                <div class="question_error">{{ form_errors(form.contactPersonsNames) }}</div>
+            </div>
+        </div>
+            
+        <div class="form_row {% if 'organizingEmails' in conference.changedFields %}field-changed{% endif %}">
+            <div class="question_field">
+                {{ form_label(form.organizingEmails) }}
+                {{ form_widget(form.organizingEmails) }}
+                <div class="question_error">{{ form_errors(form.organizingEmails) }}</div>
+            </div>
+        </div>
+            
+        <div class="form_row {% if 'website' in conference.changedFields %}field-changed{% endif %}">
+            <div class="question_field">
+                {{ form_label(form.website) }}
+                {{ form_widget(form.website) }}
+                <div class="question_error">{{ form_errors(form.website) }}</div>
+            </div>
+        </div>     
+        
+        <div class="form_row {% if 'delegatesMoreThan1Country' in conference.changedFields %}field-changed{% endif %}">
+            <div class="question_field">
+
+                {{ form_label(form.delegatesMoreThan1Country) }}
+                {{ form_widget(form.delegatesMoreThan1Country) }}
+                <div class="question_error">{{ form_errors(form.delegatesMoreThan1Country) }}</div>
+
+            </div>
+        </div>
+            
+        <div class="form_row {% if 'delegatesCountries' in conference.changedFields %}field-changed{% endif %}">
+            <div class="question_field">
+                {{ form_label(form.delegatesCountries) }}
+                {{ form_widget(form.delegatesCountries) }}
+                <div class="question_error">{{ form_errors(form.delegatesCountries) }}</div>
+            </div>
+        </div>
+            
+        <div class="form_row {% if 'delegatesAnticipate' in conference.changedFields %}field-changed{% endif %}">
+            <div class="question_field">
+                {{ form_label(form.delegatesAnticipate) }}
+                {{ form_widget(form.delegatesAnticipate) }}
+                <div class="question_error">{{ form_errors(form.delegatesAnticipate) }}</div>
+            </div>
+        </div>
+        
+        <div class="form_row {% if 'assesmentNameVenue' in conference.changedFields %}field-changed{% endif %}">
+            <div class="question_field">
+                {{ form_label(form.assesmentNameVenue) }}
+                {{ form_widget(form.assesmentNameVenue) }}
+                <div class="question_error">{{ form_errors(form.assesmentNameVenue) }}</div>
+            </div>
+        </div>
+            
+        <div class="form_row {% if 'assesmentCategoryVenue' in conference.changedFields %}field-changed{% endif %}">
+            <div class="question_field">
+                {{ form_label(form.assesmentCategoryVenue) }}
+                {{ form_widget(form.assesmentCategoryVenue) }}
+                <div class="question_error">{{ form_errors(form.assesmentCategoryVenue) }}</div>
+            </div>
+        </div>
+            
+        <div class="form_row {% if 'assesmentCity' in conference.changedFields %}field-changed{% endif %}">
+            <div class="question_field">
+                {{ form_label(form.assesmentCity) }}
+                {{ form_widget(form.assesmentCity) }}
+                <div class="question_error">{{ form_errors(form.assesmentCity) }}</div>
+            </div>
+        </div>
+
+            
+        <div class="form_row {% if 'assesmentCountry' in conference.changedFields %}field-changed{% endif %}">
+            <div class="question_field">
+                {{ form_label(form.assesmentCountry) }}
+                {{ form_widget(form.assesmentCountry) }}
+                <div class="question_error">{{ form_errors(form.assesmentCountry) }}</div>
+            </div>
+        </div>
+            
+        <div class="form_row {% if 'assesmentLocalNA' in conference.changedFields %}field-changed{% endif %}">
+            <div class="question_field">
+                {{ form_label(form.assesmentLocalNA) }}
+                {{ form_widget(form.assesmentLocalNA) }}
+                <div class="question_error">{{ form_errors(form.assesmentLocalNA) }}</div>
+            </div>
+        </div>
+            
+        <div class="form_row {% if 'assesmentProposedAccomodation' in conference.changedFields %}field-changed{% endif %}">
+            <div class="question_field">
+                {{ form_label(form.assesmentProposedAccomodation) }}
+                {{ form_widget(form.assesmentProposedAccomodation) }}
+                <div class="question_error">{{ form_errors(form.assesmentProposedAccomodation) }}</div>
+            </div>
+        </div>
+            
+        <div class="form_row {% if 'eventProgramme' in conference.changedFields %}field-changed{% endif %}">
+            <div class="question_field">
+                {{ form_label(form.eventProgramme) }}
+                {{ form_widget(form.eventProgramme) }}
+                <div class="question_error">{{ form_errors(form.eventProgramme) }}</div>
+            </div>
+        </div>
+            
+        <div class="form_row">
+            <div class="question_field">
+                <label>Documents</label>
+            </div>    
+        </div>
+            
+        <div class="form_row">
+            <div class="question_field ml-150">
+                <div id="files_canvas">
+                    
+                    {% for document in conference.documents %}
+                        
+                        <div class="clearfix ">
+                            <a href="/{{ document.webPath }}" target="_blank">{{ document.name }}</a><br>
+                            <div class="filedate left">{{ document.createdAt|date("y-m-d h:i") }}</div>
+                        </div>
+                            
+                    {% endfor %}
+                    
+                </div>   
+            </div>    
+        </div>
+            
+        <div class="form_row {% if 'comments' in conference.changedFields %}field-changed{% endif %}">
+            <div class="question_field">
+                {{ form_label(form.comments) }}
+                {{ form_widget(form.comments) }}
+                <div class="question_error">{{ form_errors(form.comments) }}</div>
+            </div>
+        </div>
+        <div class="form_row {% if 'autopublishing' in conference.changedFields %}field-changed{% endif %}">
+            <div class="question_field">
+                
+                
+                {{ form_widget(form.autopublishing, {'attr': {'class': 'mt-10'}}) }}
+                {{ form_label(form.autopublishing, null, {'label_attr': {'class': 'w-500'}}) }}
+                
+                <div class="question_error">{{ form_errors(form.autopublishing) }}</div>
+            </div>
+        </div>
+            
+
+    </div>
+    <input type="submit" name="update" value="Update" />
+    <input type="submit" name="updateAndBack" value="Update and Back to conference view" />
+    
+    {{ form_end(form) }}
+</div>    
+{% endblock %}

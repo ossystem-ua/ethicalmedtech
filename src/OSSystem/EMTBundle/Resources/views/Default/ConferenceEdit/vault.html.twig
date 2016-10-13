@@ -1,0 +1,95 @@
+{% extends 'base.html.twig'  %}
+{% trans_default_domain "OSSystemEMTBundle" %}
+
+{% block nav %}
+    {% include "OSSystemEMTBundle:Default:widgets/topmenu.html.twig" %}
+{% endblock %}
+
+{% block content %}
+
+    <h1 class="clear">Conference information</h1>
+    
+{% include "OSSystemEMTBundle:Default:widgets/conferenceTabs.html.twig" %}
+    
+
+<h2 class="clear">Document vault</h2>
+    {% if app.request.get('message') %}
+        <fieldset style="margin-bottom: 50px;">
+            <div class="message">A new document has been added to your document vault</div>
+        </fieldset>
+    {% endif %}
+
+<div class="clear"></div>
+
+<div class="registration-form">
+    
+    <div style="clear"></div>
+        
+    {{ form_start(form, {'multipart':true}) }}
+    {{ form_errors(form) }}        
+            
+    <div class="content-box">
+        
+        <div class="form_row">
+            <div class="question_field">
+                <label>Document Vault</label>
+            </div>    
+        </div>
+            
+        <div class="form_row">
+            <div class="vault_field ">
+                <div id="files_canvas" class="pb-30">
+                    {% for document in documents %}
+                        <div class="clearfix padding-5 hr">
+                            <div class="filedate left pr-20">{{ document.createdAt|date("y-m-d h:i") }}</div>
+                            <div class="w-100 left pr-20">{{ document.targetAsText }}</div>
+                            <div class="left w-350"><a href="/{{ document.webPath }}" target="_blank" download>{{ document.name }}</a></div>
+                            <div class="left"><strong>{{ document.comment }}</strong></div>
+                            <div class="filedelete right clearfix">
+                                <input type="checkbox" class="deletefilecheckbox" name="delete_file_{{document.id }}" id="delete_file_{{document.id }}" alt="{{document.id }}"> 
+                                <label for="delete_file_{{document.id }}">delete this file</label>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                    
+                
+                <div class="files_input_wrapper"> 
+                    <input type="file" name="additional_files[]">&nbsp;<input type="text" name="additional_files_comment[]" class="filecomment" placeholder="comment" maxlength="255">
+                </div>
+                <div class="files_input_button clear">
+                    <a href="#" onClick="appendFileInput(); return false;" class="underline-dashed">add more</a>
+                </div>    
+            </div>    
+        </div>
+
+            
+        
+    </div>
+    
+    <input name="submit" type="submit" value="Submit" />
+    {{ form_end(form) }}
+    
+    <script type="text/javascript">
+        var fieldsProcessed = false;
+        $('form[name=form]').submit(function( event ) {
+            
+            if (! fieldsProcessed){
+                $('input[name="deletelistdocuments[]"]').each(function(i,el){
+                    $(el).remove();
+                });
+
+                $('.deletefilecheckbox:checked').each(function(i,el){
+                    $('form[name=form]').append('<input type="hidden" name="deletelistdocuments[]" value="' + $(el).attr('alt') + '">');
+                });
+                
+                fieldsProcessed = true;
+            }
+            
+            
+            $(this).submit();
+            event.preventDefault();
+        });
+    </script>
+</div>    
+{% endblock %}

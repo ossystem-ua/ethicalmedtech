@@ -1,0 +1,347 @@
+{% extends 'base.html.twig'  %}
+{% trans_default_domain "OSSystemEMTBundle" %}
+
+{% block nav %}
+    {% include "OSSystemEMTBundle:Default:widgets/topmenu.html.twig" %}
+{% endblock %}
+
+
+{% block content %}
+    <div class="inside-content">
+        <h1>Conference preview</h1>
+
+        {% include "OSSystemEMTBundle:Default:widgets/conferenceTabs.html.twig" %}
+        
+        
+        {% if errors %}
+            <fieldset style="margin-bottom: 50px;">
+            {% for error in errors %}
+                <div class="error-message">{{ error.message }} {% if error.step %} (<a href="/conferences/edit/{{conference.id}}/step{{error.step}}">step {{ error.step }}</a>) {% endif %}</div>
+            {% endfor %}
+            </fieldset>
+        {% endif %}
+        
+        {% if successfull %}
+            <fieldset style="margin-bottom: 50px;">
+                <div class="message">We acknowledge receipt of your conference submission. Please click <a href="http://www.ethicalmedtech.eu/conference-vetting-system/full-regular-submission">here</a> for more information on the review process and response timeline</div>
+            </fieldset>
+        {% endif %}    
+        
+        {% if conference.assesmentCountry %}
+            {% if conference.assesmentCountry.location == '' %}
+                <h3>Due to a Eucomed Board decision, the assessment on conferences taking place outside Europe, Russia and Turkey have been suspended</h3>
+            {% endif %}
+        {% endif %}  
+        
+        <div class="inside-content">
+
+<h4>Ref. EMT{{ conference.id }} - Submitted on {{ conference.submissionDate|date('d/m/Y') }}</h4>
+
+    <div id="accordion" class="accordion">
+
+        <div class="half-column">
+
+                <div class="box">
+                    <h3><a href="#">Applicant</a></h3>
+
+                    <div class="item">
+                        <div class="title">Organisation name</div>
+                        <div class="value">{{ conference.user.organization }}</div>
+                    </div>
+                    <div class="item">
+                        <div class="title">Category</div>
+                        <div class="value">{{ conference.user.category }}</div>
+                    </div>
+                    <div class="item">
+                        <div class="title">Address</div>
+                        <div class="value">{{ conference.user.address }}</div>
+                    </div>
+                    <div class="item">
+                        <div class="title">Address 2</div>
+                        <div class="value">{{ conference.user.address2 }}</div>
+                    </div>
+                    <div class="item">
+                        <div class="title">Postal code</div>
+                        <div class="value">{{ conference.user.postalCode }}</div>
+                    </div>
+                    <div class="item">
+                        <div class="title">City/Town</div>
+                        <div class="value">{{ conference.user.city }}</div>
+                    </div>
+                    <div class="item">
+                        <div class="title">Country</div>
+                        <div class="value">{{ conference.user.country }}</div>
+                    </div>
+                </div>
+            
+            <div class="box">
+                <h3><a href="#">General details of the event</a></h3>
+
+                <div class="item  {% if 'title' in conference.changedFields %}field-changed{% endif %}">
+                    <div class="title">Name of the event</div>
+                    <div class="value">{{ conference.title }}</div>
+                </div>
+                <div class="item  {% if 'acronym' in conference.changedFields %}field-changed{% endif %}">
+                    <div class="title">Acronym of the event</div>
+                    <div class="value">{{ conference.acronym }}</div>
+                </div>
+                <div class="item  {% if 'therapeuticArea' in conference.changedFields %}field-changed{% endif %}">
+                    <div class="title">Therapeutic area</div>
+                    <div class="value">{{ conference.therapeuticArea }}</div>
+                </div>
+                <div class="item  {% if 'therapeuticAreaOther' in conference.changedFields %}field-changed{% endif %}">
+                    <div class="title">Therapeutic area (other)</div>
+                    <div class="value">{{ conference.therapeuticAreaOther }}</div>
+                </div>
+                <div class="item  {% if 'startConferenceDate' in conference.changedFields %}field-changed{% endif %}">
+                    <div class="title">Start of event</div>
+                    <div
+                        class="value">{{ conference.startConferenceDate|date('d/m/Y') }}</div>
+                </div>
+                <div class="item  {% if 'endConferenceDate' in conference.changedFields %}field-changed{% endif %}">
+                    <div class="title">End of event</div>
+                    <div
+                        class="value">{{ conference.endConferenceDate|date('d/m/Y') }}</div>
+                </div>
+                <div class="item  {% if 'organizingCompaniesNames' in conference.changedFields %}field-changed{% endif %}">
+                    <div class="title">Name of Conference Organizing Party(ies)</div>
+                    <div class="value">{{ conference.organizingCompaniesNames }} </div>
+                </div>
+                <div class="item  {% if 'contactPersonsNames' in conference.changedFields %}field-changed{% endif %}">
+                    <div class="title">Name(s) of contact person(s)</div>
+                    <div class="value">{{ conference.contactPersonsNames }}</div>
+                </div>
+                <div class="item  {% if 'organizingEmails' in conference.changedFields %}field-changed{% endif %}">
+                    <div class="title">Organiser’s e-mail address(s)</div>
+                    <div class="value">{{ conference.organizingEmails }}</div>
+                </div>
+                <div class="item  {% if 'website' in conference.changedFields %}field-changed{% endif %}">
+                    <div class="title">Website of the event</div>
+                    <div class="value"><a href="{{ conference.website }}"
+                                          target="_new">{{ conference.website }}</a></div>
+                </div>
+            </div>
+
+            <div class="box">
+                <h3><a href="#">Appendix/links</a></h3>
+
+                <div class="item  {% if 'eventProgramme' in conference.changedFields %}field-changed{% endif %}">
+                    <div class="title">Event programme</div>
+                    <div class="value"><a href="{{ conference.eventProgramme }}"
+                                          target="_new">{{ conference.eventProgramme }}</a></div>
+                </div>
+                <div class="item">
+                    <div class="title">Documents</div>
+                    <div class="value">
+                        <ol>
+                            {% for doc in conference.documents %}
+                                <li>
+                                    <a href="/{{ doc.webPath }}" target="_new" download>{{ doc.name }}</a>
+                                </li>
+                            {% endfor %}
+                        </ol>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="title">Other comments</div>
+                    <div class="value">{{ conference.comments|raw }}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="half-column">
+
+                <div class="box">
+                    <h3><a href="#">Contact details</a></h3>
+
+                    <div class="item">
+                        <div class="title">Title</div>
+                        <div class="value">{{ conference.user.title }}</div>
+                    </div>
+                    <div class="item">
+                        <div class="title">First name</div>
+                        <div class="value">{{ conference.user.fName }}</div>
+                    </div>
+                    <div class="item">
+                        <div class="title">Last name</div>
+                        <div class="value">{{ conference.user.lName }}</div>
+                    </div>
+                    <div class="item">
+                        <div class="title">Job title</div>
+                        <div class="value">{{ conference.user.jobTitle }}</div>
+                    </div>
+                    <div class="item">
+                        <div class="title">Telephone</div>
+                        <div class="value">{{ conference.user.phone }}</div>
+                    </div>
+                    
+                    <div class="item">
+                        <div class="title">Email</div>
+                        <div class="value">
+                            {%if conference.user.alternativeEmail %}{{ conference.user.alternativeEmail }}{% else %}{{ conference.user.email }}{% endif %}
+                        </div>
+                    </div>
+                </div>
+            
+            <div class="box">
+                <h3><a href="#">Location</a></h3>
+
+                <div class="item {% if 'assesmentNameVenue' in conference.changedFields %}field-changed{% endif %}">
+                    <div class="title">Name of venue</div>
+                    <div class="value">{{ conference.assesmentNameVenue }}</div>
+                </div>
+                <div class="item  {% if 'assesmentCategoryVenue' in conference.changedFields %}field-changed{% endif %}">
+                    <div class="title">Category of venue</div>
+                    <div class="value">{{ conference.assesmentCategoryVenue }}</div>
+                </div>
+                <div class="item  {% if 'assesmentCity' in conference.changedFields %}field-changed{% endif %}">
+                    <div class="title">City/Town</div>
+                    <div class="value">{{ conference.assesmentCity }}</div>
+                </div>
+                <div class="item  {% if 'assesmentCountry' in conference.changedFields %}field-changed{% endif %}">
+                    <div class="title">Country</div>
+                    <div class="value">{{ conference.assesmentCountry }}</div>
+                </div>
+                <div class="item  {% if 'assesmentLocalNA' in conference.changedFields %}field-changed{% endif %}">
+                    <div class="title">Local national associations</div>
+                    <div class="value">{{ conference.assesmentLocalNA }}</div>
+                </div>
+                <div class="item  {% if 'assesmentProposedAccomodationDocument' in conference.changedFields %}field-changed{% endif %}">
+                    <div class="title">Accomodation document</div>
+                    <div class="value">
+                        {% if conference.assesmentProposedAccomodationDocument %}
+                            <a href="/{{ conference.assesmentProposedAccomodationDocument.webPath }}" target="_blank" download>Download the document</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="box">
+                <h3><a href="#">Information on delegates / Sponsored Healthcare Professionals (HCPs)</a></h3>
+
+                <div class="item  {% if 'delegatesMoreThan1Country' in conference.changedFields %}field-changed{% endif %}">
+                    <div class="title">Are HCPs / delegates coming from more than one country?</div>
+                    <div class="value">
+                        {% if conference.delegatesMoreThan1Country == 1 %}
+                            Yes
+                        {% elseif conference.delegatesMoreThan1Country == 2 %}
+                        {% else %}
+                            No
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="item  {% if 'delegatesCountries' in conference.changedFields %}field-changed{% endif %}">
+                    <div class="title">Countries of origin of HCPs / delegates</div>
+                    <div class="value">
+                        <ul>
+                        {% for country in conference.delegatesCountries %}
+                            <li>{{country}}</li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="item  {% if 'delegatesAnticipate' in conference.changedFields %}field-changed{% endif %}">
+                    <div class="title">Number of HCPs / delegates</div>
+{#                    <div class="value">{{ conference.delegatesAnticipate }}</div>#}
+                    {% if conference.delegatesAnticipate == 0 %}
+                        <div class="value"> < 50 </div>
+                    {% elseif conference.delegatesAnticipate == 1 %}
+                        <div class="value"> 51 -200 </div>
+                    {% elseif conference.delegatesAnticipate == 2 %}
+                        <div class="value"> 201 - 500</div>
+                    {% elseif conference.delegatesAnticipate == 3 %}
+                        <div class="value"> 501 - 1000 </div>
+                    {% elseif conference.delegatesAnticipate == 4 %}
+                        <div class="value"> ≥ 1000 participants </div>
+                    {% else %}
+                        <div class="value"> - </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="box">
+                <h3><a href="#">Status</a></h3>
+
+                <div class="item">
+                    <div class="title">Status</div>
+                    <div class="value conference-status-{% if conference.conferenceStatus == null %}0{% else %}{{ conference.conferenceStatus.id }}{% endif %}">{{ conference.conferenceStatus }}</div>
+                </div>
+                <div class="item  {% if 'conferenceStatusText' in conference.changedFields %}field-changed{% endif %}">
+                    <div class="title">Status comment</div>
+                    <div class="value">{{ conference.conferenceStatusText|raw }}</div>
+                </div>
+                
+                {% if conference.isPreclearance %}
+                <div class="item  {% if 'autopublishing' in conference.changedFields %}field-changed{% endif %}">
+                    <div class="title">Publish Pre-clearance</div>
+                    <div class="value">{% if conference.autopublishing %}Yes{% else %}No{% endif %}</div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+                
+    <div style="clear:both;"></div>       
+    <a name="criteria"></a>
+    <div class="box status-box">
+        <h3><a href="#criteria">Assessed criteria</a></h3>
+        {% if conference.isCORecommendation %}
+            <h3>* as recommendation</h3>
+        {% endif %}
+        
+        {% for criteria in conference.criterias %}
+        <div class="item">
+            <div class="title">{{criteria.criteria.title}}</div>
+            <div class="value">
+                <span class="strong criteria-state-{{criteria.status}}">{{criteria.criteria.statusAsText(criteria.status)}}</span>
+                
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div style="clear:both;"></div>
+  
+</div>
+
+    <div class="button-back">
+        <a href="{{ path('os_system_emt_conference_edit_step1', {"conferenceId": conference.id, 'country': countryId}) }}"><button>Back to edit</button></a>
+        
+        {# Start PopUp #}
+        <a href=""></a>
+        <a href="javascript:SubmitPopUpShow()">
+            <button>Send for assessment</button>
+        </a>
+
+        <div class="emt-popup" id="submit-popup">
+            <div class="emt-popup-content emt-popup-submit-content">
+                We hereby acknowledge receipt of your submission request for the following 
+                conference: <strong>{{ conference.title }}</strong> 
+                from <strong>{{ conference.startConferenceDate|date('d/m/Y') }}</strong>
+                to <strong>{{ conference.endConferenceDate|date('d/m/Y') }}</strong> 
+                in <strong>{{ conference.assesmentCity }}</strong>, 
+                <strong>{{ conference.assesmentCountry }}</strong> 
+                (herewith referred to as the “Conference”). 
+                We will issue a recommendation to your request, via email, 
+                within 30 calendar days based on the review process 
+                explained on the EthicalMedTech platform. 
+                Click <a href="http://www.ethicalmedtech.eu/conference-vetting-system/full-regular-submission" target="_blank">here</a> for more information.
+                <a href="/conferences/edit/{{ conference.id }}/submit" class="button green">
+                    <span class="arrow">Send for assessment</span>
+                </a>
+                <a href="javascript:SubmitPopUpHide()" class="button red">
+                    <span class="arrow">Cancel</span>
+                </a>
+            </div>
+            <div class="clear"></div>
+        </div>
+        {# End PopUp #}
+        {% if conference.isPreclearance and (user.profileType == 3 or user.profileType ==4) %}
+            <a href="/conferences/edit/{{ conference.id }}/transformtofull"><button>Transform to Full submission</button></a>
+        {% endif%}
+    </div>
+{#{% endif %}#}
+
+</div>
+
+<div class="clear"></div>
+{% endblock %}

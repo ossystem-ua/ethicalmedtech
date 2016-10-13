@@ -1,0 +1,31 @@
+<div class="comments">
+    <div class="comment-form">
+    <h5>Submit additional information</h5>
+    {{form_start(formAddMessage, {'multipart':true})}}
+
+    <div class="error">
+    {{form_errors(formAddMessage)}}
+    </div>
+    {{form_widget(formAddMessage.content)}}
+
+    <p class="form_row">
+            <div class="question_field">
+
+                <div class="files_input_wrapper">
+                    <input type="file" name="additional_files[]" value="">
+                    <input type="text" name="additional_files_comment[]" class="filecomment" placeholder="comment" maxlength="255">                    
+
+                </div>
+                <div class="files_input_button clear">
+                    <a href="#" onClick="appendFileInput(); return false;" class="underline-dashed">add more</a>
+                </div>    
+            </div>    
+
+        </p>
+    {{form_rest(formAddMessage)}}
+
+    <input type="submit" value="Submit message" />
+    <input type="reset" value="Clean up"/>
+{{form_end(formAddMessage)}}
+    </div>
+</div>

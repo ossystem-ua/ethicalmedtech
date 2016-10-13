@@ -1,0 +1,67 @@
+{% extends 'base.html.twig'  %}
+{% trans_default_domain "OSSystemEMTBundle" %}
+
+{% block nav %}
+    {% include "OSSystemEMTBundle:Default:widgets/topmenu.html.twig" %}
+{% endblock %}
+
+
+{% block content %}
+<div class="put-right">
+    
+  <a class="event-button 123" href="/conferences/termsPa"><span>Pre-clearance</span></a>
+  <a class="event-button" href="/conferences/terms"><span>Submit an event</span></a>
+</div>
+
+<h1>Conferences</h1>
+
+<div class="clear"></div>
+
+    {% for conference in conferences %}
+        {% if conference.title is not null and
+              conference.startConferenceDate is not null and
+              conference.country is not null
+        %}
+        <div class="content-box clearfix">
+            <h2>Status: {% if conference.status != '' %}{{conference.status}}{% else %}IsNew{% endif %}</h2>
+            <div class="left-content">
+               <h3>{{conference.title}}</h3>
+               <div class="date">From {{conference.startConferenceDate | date('d M Y')}} to {{conference.endConferenceDate | date('d M Y')}}</div>
+            </div>
+            <div class="right-content">
+                {% if not conference.isNew and conference.country is not null %}
+                    <a href="{{ path("os_system_emt_conference_view", {"conferenceId": conference.id})}}" class="button blue"><span class="arrow">View</span></a>
+                {% endif %}
+                
+                {# Start PopUp #}
+                <a href="javascript:PopUpShow({{ conference.id }})" class="button red">
+                    <span class="arrow">Delete</span>
+                </a>
+
+                <div class="emt-popup" id="delete-popup-{{ conference.id }}">
+                    <div class="emt-popup-content emt-popup-del-content">
+                        Are you sure you want to delete conference?<br/>
+                        <a href="{{ path("os_system_emt_conference_delete", {"conferenceId": conference.id})}}" class="button red">
+                            <span class="arrow">Delete</span>
+                        </a>
+                        <a href="javascript:PopUpHide({{ conference.id }})" class="button blue">
+                            <span class="arrow">Cancel</span>
+                        </a>
+                    </div>
+                </div>
+                {# End PopUp #}
+                
+                <a href="{{ path("os_system_emt_conference_edit_step1", {"conferenceId": conference.id, 'country': 0})}}" class="button green"><span class="arrow">Edit</span></a>
+                {% if conference.country is defined and conference.country != '' %}
+                    <a href="{{ path("os_system_emt_conference_messages", {"conferenceId": conference.id})}}" class="button blue"><span class="arrow">Show Messages Board</span></a>
+                        {% if conference.statusId in [5,6,8,12,17,19,20] and app.user.profileType not in [3,4] %}
+                            <a href="{{ path("os_system_emt_conference_appeal", {"conferenceId": conference.id})}}" class="button blue"><span class="arrow">Appeal Board</span></a>
+                        {% endif %}
+               {% endif %}
+               <a href="{{ path("os_system_emt_conference_vault", {"conferenceId": conference.id}) }}" class="button blue"><span class="arrow">Document vault</span></a>
+            </div>    
+        </div>
+        {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}

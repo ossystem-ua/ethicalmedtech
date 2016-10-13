@@ -1,0 +1,3 @@
+os_system_emt_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: OSSystemEMTBundle:Default:index }

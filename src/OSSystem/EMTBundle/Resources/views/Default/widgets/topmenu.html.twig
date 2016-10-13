@@ -1,0 +1,21 @@
+{% trans_default_domain "OSSystemEMTBundle" %}
+{% if app.user is null %}
+    <div class="navigation">
+        <div class="left-navigation"></div>
+        <div class="right-navigation"><a href="/">{{ "Sign Up / Login"|trans }}</a></div>
+    </div>
+{%else%}
+    <div class="navigation">
+        <div class="left-navigation">
+            {% if (app.user.profileType == 4) or (app.user.profileType == 3) or (app.user.profileType == 5) %}
+                <a href="{{ path("os_system_emt_conference_all") }}">{{ "emt_conf_all"|trans }}</a>
+                <a href="{{ path("os_system_emt_conference_archives")}}">{{ "emt_conf_archives"|trans }}</a>
+                <a href="{{ path("os_system_emt_conference_dblentries")}}">Double Entries</a>
+            {% endif %}
+            <a href="/">{{ "My conferences"|trans }}</a>
+        </div>
+        <div class="right-navigation">
+            {{"Welcome"|trans}}, <a href="/profile" title="{{ app.user.fName }} {{app.user.lName}}">{{app.user.organization}}</a>  -  <a href="/profile">{{"Edit profile"|trans}}</a>   -  <a href="/logout">{{"Logout"|trans}}</a>
+        </div>
+    </div>
+{% endif %}

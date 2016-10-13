@@ -1,0 +1,13 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+    {% if app.user.profileType is defined and app.user.profileType != '' %}
+    <div class="button blue" style="float: right;">
+        <a href="{{path('fos_user_change_password')}}"><span>Change password</span></a>
+    </div>
+  <h1>Edit your profile</h1>
+  {% else %}
+      <h1>Create your profile</h1>
+      {% endif %}
+{% include "FOSUserBundle:Profile:edit_content.html.twig" %}
+{% endblock fos_user_content %}

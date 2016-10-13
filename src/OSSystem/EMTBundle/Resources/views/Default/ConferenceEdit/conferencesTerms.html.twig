@@ -1,0 +1,51 @@
+{% extends 'base.html.twig'  %}
+{% trans_default_domain "OSSystemEMTBundle" %}
+
+{% block nav %}
+    {% include "OSSystemEMTBundle:Default:widgets/topmenu.html.twig" %}
+{% endblock %}
+
+{% block content %}
+    <h1>{{"Terms & conditions for Pre-Clearance"|trans}}</h1>
+    <div class="form_row">
+        <div class="question_field" data-conferenceId="{{ conferenceId }}">
+            <label class="emt-label-terms-country">Please select the country where the event will be hosted</label>
+            {{ form_widget(form.assesmentCountry, { 'attr': {'class': 'validate[required] emt-select-terms-country'} }) }}
+            <div class="question_error">{{ form_errors(form.assesmentCountry) }}</div>
+        </div>
+    </div>
+    <div class="clear"></div>
+<div class="emt-eucomed-terms">
+  <h3>
+    Please note that assessment of conferences taking place in this country are made based on the provision of Eucomed Code of Ethical Business Practice. National laws and regulations have not been taken into account.
+  </h3>
+    <p>{{"I have read and understood"|trans}}:</p>
+    <ul>
+        <li><a href="http://www.medtecheurope.org/sites/default/files/resource_items/files/11092008_MTE_Eucomed%20Guidelines%20on%20Interactions%20with%20Healthcare%20Professionals.pdf" target="_blank">The Eucomed Code of Ethical Business Practice</a></li>
+        <li><a href="http://www.medtecheurope.org/sites/default/files/resource_items/files/Q%26A%20on%20the%20Eucomed%20Guidelines%20On%20Interactions%20with%20Healthcare%20Professionals%20December%202015.pdf" target="_blank">Q &amp; A on the Eucomed Guidelines on Interactions with Healthcare Professionals</a></li>
+    </ul>
+    <br>
+    <a class="button pr-20 emt-eucomed-terms-submit-path" href=""><span>{{"Accept the Terms & conditions"|trans}}</span></a>
+</div>
+
+<div class="emt-mecomed-terms">
+    <p>{{"I have read and understood"|trans}}:</p>
+    <ul>
+        <li><a href="http://www.medtecheurope.org/sites/default/files/resource_items/files/11092008_MTE_Eucomed%20Guidelines%20on%20Interactions%20with%20Healthcare%20Professionals.pdf" target="_blank">The Eucomed Code of Ethical Business Practice</a></li>
+        <li><a href="http://www.medtecheurope.org/sites/default/files/resource_items/files/Q%26A%20on%20the%20Eucomed%20Guidelines%20On%20Interactions%20with%20Healthcare%20Professionals%20December%202015.pdf" target="_blank">Q &amp; A on the Eucomed Guidelines on Interactions with Healthcare Professionals</a></li>
+    </ul>
+    <br>
+    <a class="button pr-20 emt-mecomed-terms-submit-path" href=""><span>{{"Accept the Terms & conditions"|trans}}</span></a>
+</div>
+
+<div class="emt-other-terms">
+    <h3>This conference will be reviewed and you'll get our opinion as <u>recommendation</u> only</h3>
+    <h3>Due to a Eucomed Board decision, the assessment on conferences taking place outside Europe, Russia and Turkey have been suspended</h3>
+    <ul>
+        <li><a href="http://www.medtecheurope.org/sites/default/files/resource_items/files/11092008_MTE_Eucomed%20Guidelines%20on%20Interactions%20with%20Healthcare%20Professionals.pdf" target="_blank">The Eucomed Code of Ethical Business Practice</a></li>  
+        <li><a href="http://www.medtecheurope.org/sites/default/files/resource_items/files/Q%26A%20on%20the%20Eucomed%20Guidelines%20On%20Interactions%20with%20Healthcare%20Professionals%20December%202015.pdf" target="_blank">Q &amp; A on the Eucomed Guidelines on Interactions with Healthcare Professionals</a></li> 
+    </ul>
+    <p><input type="checkbox" id="emt-understood"/> {{"I have read and understood"|trans}}</p>
+    <a class="button pr-20 emt-other-terms-submit-path emt-other-terms-checkbox-on" href=""><span>{{"Accept the Terms & conditions"|trans}}</span></a>
+</div>
+{% endblock %}

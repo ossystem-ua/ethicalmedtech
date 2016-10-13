@@ -1,0 +1,117 @@
+{% extends 'base.html.twig'  %}
+{% trans_default_domain "OSSystemEMTBundle" %}
+
+{% block nav %}
+    {% include "OSSystemEMTBundle:Default:widgets/topmenu.html.twig" %}
+{% endblock %}
+
+{% block content %}
+
+    <h1 class="clear">Conference information</h1>
+    
+{% include "OSSystemEMTBundle:Default:widgets/conferenceTabs.html.twig" %}
+    
+
+<h2 class="clear">Appendix/links</h2>
+
+<div class="clear"></div>
+
+<div class="registration-form">
+    
+    {{ form_start(form, {'multipart':true}) }}
+    {{ form_errors(form) }}
+    
+    <div style="clear"></div>
+
+    <div class="content-box">
+        
+        
+            
+        <div class="form_row">
+            <div class="question_field">
+                {{ form_label(form.eventProgramme) }}
+                {{ form_widget(form.eventProgramme, { 'attr': {'class': 'validate[custom[url]]'} }) }}
+                <div class="question_error">{{ form_errors(form.eventProgramme) }}</div>
+            </div>
+        </div>
+            
+        <div class="form_row">
+            <div class="question_field">
+                <label>Documents</label>
+            </div>    
+
+            <div class="question_field">
+                <div id="files_canvas">
+                    
+                    {% for document in conference.documents %}
+                        
+                        <div class="clearfix hr padding-5">
+                            {% if lockmode is not defined or lockmode %}
+                            <div class="filedelete right clearfix">
+                                <input type="checkbox" class="deletefilecheckbox" name="delete_file_{{document.id }}" id="delete_file_{{document.id }}" alt="{{document.id }}"> 
+                                <label for="delete_file_{{document.id }}">delete this file</label>
+                            </div>
+                            {% endif %}
+                            <div class="filedate left mr-10">{{ document.createdAt|date("y-m-d h:i") }}</div> 
+                            <a href="/{{ document.webPath }}" target="_blank" download>{{ document.name }}</a><br>
+                            {% if document.comment %}
+                                <div class="filedate left">Comment: {{ document.comment }}</div>
+                            {% endif %} 
+                        </div>
+                    {% endfor %}
+                    
+                </div>
+                <div class="files_input_wrapper"> 
+                    <input type="file" name="additional_files[]">&nbsp;<input type="text" name="additional_files_comment[]" class="filecomment" placeholder="comment" maxlength="255">
+                    
+                </div>
+                <div class="files_input_button clear">
+                    <a href="#" onClick="appendFileInput(); return false;" class="underline-dashed">add more</a>
+                </div>    
+            </div>    
+        </div>
+
+        <div class="form_row">
+            <div class="question_field">
+                {{ form_label(form.comments) }}
+                {{ form_widget(form.comments) }}
+                <div class="question_error">{{ form_errors(form.comments) }}</div>
+            </div>
+        </div>
+            
+        
+    </div>
+   
+    <div class="clear"><input type="submit" value="Save" name="save"/> (Keeps your submission in file and allows you to edit in the future)  </div>
+   
+    {{ form_end(form) }}
+    
+    <script type="text/javascript">
+        var fieldsProcessed = false;
+        $('form[name=ossystem_emtbundle_conference]').submit(function( event ) {
+            
+            if (! fieldsProcessed){
+                $('input[name="ossystem_emtbundle_conference[deletelistdocuments][]"]').each(function(i,el){
+                    $(el).remove();
+                });
+
+                $('.deletefilecheckbox:checked').each(function(i,el){
+                    $('form[name=ossystem_emtbundle_conference]').append('<input type="hidden" name="deletelistdocuments[]" value="' + $(el).attr('alt') + '">');
+                });
+                
+                fieldsProcessed = true;
+            }
+            
+            $(this).submit();
+            window.location.href = "/conferences/edit/{{ conference.id }}/submit";
+            event.preventDefault();
+        });
+    </script>
+</div>    
+{% endblock %}
+
+
+{% block editScripts %}
+    {{ parent() }}
+    <script src="{{ asset('resources/js/stepedit.js') }}"></script>
+{% endblock %}

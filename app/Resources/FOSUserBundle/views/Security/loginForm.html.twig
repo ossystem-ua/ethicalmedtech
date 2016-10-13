@@ -1,0 +1,51 @@
+{% trans_default_domain 'OSSystemEMTBundle' %}
+<div class="login-box">
+    <h1>{{'emt_main_page.login' | trans}}</h1>
+{% if error is not defined %}
+    {% set error = "" %}
+{% endif %}
+{% if error %}
+    <div class="error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
+
+{% if newUser %}
+    {% block content %}
+        <div class="alert alert-success fade in">{{'emt_registration.confirmed' | trans({'%sign_in%': 'Sign in', '%path%': path('os_system_emt_home') } ) | raw }}</div>
+    {% endblock %}
+{% endif %}
+
+    <p>{{'emt_main_page.login_description' | trans}}</p>
+    
+    <div class="login-col-1">
+        <div class="heading">{{'emt_main_page.registered' | trans}}</div>
+        <form method="post" action="{{ path("fos_user_security_check") }}">
+        <div class="main-log">
+            
+                <input type="hidden" id="signin__csrf_token" name="_csrf_token" value="{{ fos_csrf_provider.generateCsrfToken('authenticate') }}">
+                
+                <label for="signin_username">{{'emt_main_page.username_or_email' | trans}}</label>      
+                <input autofocus="autofocus" type="text" id="username" name="_username" required="required" placeholder="{{'emt_main_page.username_or_email' | trans}}">      
+                <label for="signin_password">{{'emt_user.password' | trans}}</label>      
+                <input type="password" id="password" name="_password" required="required" placeholder="{{'emt_user.password' | trans}}">    
+            
+        </div>
+    
+        <input type="checkbox" id="remember_me" name="_remember_me" value="on">    
+        <label for="_remember_me">{{'emt_main_page.remember' | trans}}</label>
+        
+        <div class="button blue input-button input-login">
+            <input type="submit" value="Sign in" id="_submit" name="_submit">
+        </div> 
+    </form>
+        <a class="forgot-pass" href="{{path("fos_user_resetting_request")}}">{{'emt_main_page.forgot' | trans}}</a>
+    </div>
+
+
+    <div class="login-col-2">
+        <div class="heading">{{'emt_main_page.not_registered' | trans}}</div>
+        <p class="intro-text">{{'emt_main_page.not_registered_description' | trans}}</p>
+        <div class="button blue">
+            <a href="{{path("fos_user_registration_register")}}"><span>{{'emt_main_page.register_now' | trans}}</span></a>
+        </div> 
+    </div>
+</div>

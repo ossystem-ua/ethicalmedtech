@@ -1,0 +1,66 @@
+{% extends 'base.html.twig'  %}
+{% trans_default_domain "OSSystemEMTBundle" %}
+
+{% block nav %}
+    {% include "OSSystemEMTBundle:Default:widgets/topmenu.html.twig" %}
+{% endblock %}
+
+{% block content %}
+
+    <h1 class="clear">Conference information</h1>
+    
+{% include "OSSystemEMTBundle:Default:widgets/conferenceTabs.html.twig" %}
+    
+
+<h2 class="clear">Information on delegates</h2>
+
+<div class="clear"></div>
+
+<div class="registration-form">
+    
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    
+    <div style="clear"></div>
+
+    <div class="content-box">
+        
+        <div class="form_row">
+            <div class="question_field">
+
+                {{ form_label(form.delegatesMoreThan1Country) }}
+                {{ form_widget(form.delegatesMoreThan1Country) }}
+
+                <div class="question_error">{{ form_errors(form.delegatesMoreThan1Country) }}</div>
+            </div>
+        </div>
+            
+        <div class="form_row">
+            <div class="question_field">
+                {{ form_label(form.delegatesCountries) }}
+                {{ form_widget(form.delegatesCountries) }}
+                <div class="btn_selectAll" id="btn_selectAll">Select all countries</div>
+                <div class="question_error">{{ form_errors(form.delegatesCountries) }}</div>
+            </div>
+        </div>
+            
+        <div class="form_row">
+            <div class="question_field">
+                {{ form_label(form.delegatesAnticipate) }}
+                {{ form_widget(form.delegatesAnticipate)}}
+                <div class="question_error">{{ form_errors(form.delegatesAnticipate) }}</div>
+            </div>
+        </div>
+
+    </div>
+    
+    <input type="submit" value="Continue" />
+    
+    {{ form_end(form) }}
+</div>    
+{% endblock %}
+
+{% block editScripts %}
+    {{ parent() }}
+    <script src="{{ asset('resources/js/stepedit.js') }}"></script>
+{% endblock %}

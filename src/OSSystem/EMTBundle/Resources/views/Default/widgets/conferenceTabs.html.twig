@@ -1,0 +1,23 @@
+<div class="clearfix">
+    <div class="left breadcrumbs">
+        <a href="{{ path('os_system_emt_conference_edit_step1', {"conferenceId": conference.id, 'country': 0}) }}" class="first {% if step==1%}current{%endif%}">{{ "1. General Information"|trans }}</a>
+        <a href="{{ path('os_system_emt_conference_edit_step2', {"conferenceId": conference.id}) }}" class="{% if step==2%}current{%endif%}">{{"2. Delegates"|trans }}</a>
+        <a href="{{ path('os_system_emt_conference_edit_step3', {"conferenceId": conference.id}) }}" class="{% if step==3%}current{%endif%}">{{"3. Appendix"|trans }}</a>
+        <a href="{{ path('os_system_emt_conference_preview', {"conferenceId": conference.id}) }}" class="{% if step==4%}current{%endif%} last">{{"4. Preview"|trans }}</a>
+    </div>
+
+    <div class="right breadcrumbs">
+        <a href="{{ path("os_system_emt_conference_vault", {"conferenceId": conference.id}) }}" class="{% if step==10%}current{%endif%} last">Document vault</a>
+    </div>
+
+    {% if not conference.isNew and conference.assesmentCountry is defined and conference.assesmentCountry != '' %}
+        <div class="right breadcrumbs">
+            <a href="{{ path('os_system_emt_conference_messages', {"conferenceId": conference.id}) }}" class="{% if step==11%}current{%endif%} ">Messages</a>
+        </div>
+    {% endif %}
+    {% if not conference.isNew %}
+        <div class="right breadcrumbs">
+            <a href="{{ path('os_system_emt_conference_appeal', {'conferenceId': conference.id}) }}" class="{% if step==11%}current{%endif%} ">Appeal</a>
+        </div>
+    {% endif %}
+</div>

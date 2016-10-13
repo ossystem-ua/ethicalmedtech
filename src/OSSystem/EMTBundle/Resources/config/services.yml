@@ -1,0 +1,37 @@
+services:
+#    os_system_emt.example:
+#        class: OSSystem\EMTBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+#### REGISTRATION #####
+    user.registration.form.type:
+        class: OSSystem\EMTBundle\Form\RegistrationFormType
+        arguments: [%fos_user.model.user.class%, '@service_container']
+        tags:
+            - { name: form.type, alias: user_registration }
+ 
+#### PROFILE #####
+    user.profile.form.type:
+        class: OSSystem\EMTBundle\Form\ProfileFormType
+        arguments: [%fos_user.model.user.class%, '@service_container']
+        tags:
+            - { name: form.type, alias: user_profile }
+#### Listener ####
+    my.subscriber:
+        class: OSSystem\EMTBundle\Listener\EMTEventSubscriber
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+        arguments: [@service_container]    
+            
+#### Mail ####
+    emt.notification:
+        class: OSSystem\EMTBundle\Service\NotificationService
+        arguments: [@service_container]
+        
+#### Save Mail ####
+    emt.savemail:
+        class: OSSystem\EMTBundle\Service\SaveMailService
+        arguments: ['@service_container', '@doctrine.orm.entity_manager', '@security.context']
+        
+
+        

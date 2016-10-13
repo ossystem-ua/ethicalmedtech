@@ -1,0 +1,7 @@
+{% extends '::base.html.twig' %}
+
+{% trans_default_domain 'OSSystemEMTBundle' %}
+
+{% block content %}
+    <p>{{ 'emt_registration.check_email'|trans({'%email%': user.email}) }} <a href="{{path('os_system_static_page', {url: 'contactus'})}}">{{'emt_contact_us'|trans}}</a></p>
+{% endblock %}

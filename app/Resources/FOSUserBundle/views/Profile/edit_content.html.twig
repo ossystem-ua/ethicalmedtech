@@ -1,0 +1,109 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
+  
+    {#{{ form_widget(form) }}#}
+    <div class="registration-form">
+        <fieldset>
+            <div class="title"><span>Applicant</span></div>
+            <br />
+            <div class=' tipsify'>
+                <div class="errors_registration">{{ form_errors(form.organization) }}</div>
+                {{ form_label(form.organization) }}
+                {{ form_widget(form.organization) }}
+            </div>
+
+            <div class='tipsify'>
+                <div class="errors_registration">{{ form_errors(form.category) }}</div>
+                {{ form_label(form.category) }} 
+
+                {% if app.user.profileType is defined and app.user.profileType != '' %}
+                    {{ form_widget(form.category, {'disabled': 'disabled'}   ) }}
+                {% else %}
+                    {{ form_widget(form.category, {'enabled': 'enabled'}   ) }}
+                {% endif %}
+            </div>
+
+            <div class='tipsify'>
+                <div class="errors_registration">{{ form_errors(form.address) }}</div>
+                {{ form_label(form.address) }}
+                {{ form_widget(form.address) }}
+            </div>
+
+            <div class='tipsify'>
+                <div class="errors_registration">{{ form_errors(form.postalCode) }}</div>
+                {{ form_label(form.postalCode) }}
+                {{ form_widget(form.postalCode) }}
+            </div>
+
+            <div class='tipsify'>
+                <div class="errors_registration">{{ form_errors(form.city) }}</div>
+                {{ form_label(form.city) }}
+                {{ form_widget(form.city) }}
+            </div>
+
+            <div class='tipsify'>
+                <div class="errors_registration">{{ form_errors(form.country) }}</div>
+                {{ form_label(form.country) }}
+                {{ form_widget(form.country) }}
+            </div>
+        </fieldset>
+{#        //second part form#}
+        <fieldset>
+            <div class="title"><span>Contact Details</span></div>
+            <br />
+            <div class='tipsify'>
+                <div class="errors_registration">{{ form_errors(form.title) }}</div>
+                {{ form_label(form.title) }}
+                {{ form_widget(form.title) }}
+            </div>
+
+            <div class='tipsify'>
+                <div class="errors_registration">{{ form_errors(form.fName) }}</div>
+                {{ form_label(form.fName) }}
+                {{ form_widget(form.fName) }}
+            </div>
+
+            <div class='tipsify'>
+                <div class="errors_registration">{{ form_errors(form.lName) }}</div>
+                {{ form_label(form.lName) }}
+                {{ form_widget(form.lName) }}
+            </div>
+
+            <div class='tipsify'>
+                <div class="errors_registration">{{ form_errors(form.jobTitle) }}</div>
+                {{ form_label(form.jobTitle) }}
+                {{ form_widget(form.jobTitle) }}
+            </div>
+
+            <div class='tipsify'>
+                <div class="errors_registration">{{ form_errors(form.phone) }}</div>
+                {{ form_label(form.phone) }}
+                {{ form_widget(form.phone) }}
+            </div>
+
+            <div class='tipsify'>
+                <div class="errors_registration">{{ form_errors(form.email) }}</div>
+                {{ form_label(form.email) }}
+                {{ form_widget(form.email) }}
+            </div>
+            <div class='tipsify'>
+                <div class="errors_registration">{{ form_errors(form.optIn) }}</div>
+                {{ form_label(form.optIn) }}
+                {{ form_widget(form.optIn) }}
+                <span class="desc">I want to receive updates on the Conference Vetting System</span>
+            </div>
+        </fieldset>
+        {{ form_widget(form._token) }}
+        
+        <div class="button blue input-button">
+            <input type="submit" value="Save">
+        </div>
+    </div>
+
+
+    
+    
+</form>
+    
+

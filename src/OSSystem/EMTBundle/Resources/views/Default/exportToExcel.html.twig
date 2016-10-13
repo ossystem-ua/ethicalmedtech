@@ -1,0 +1,54 @@
+{% extends 'base.html.twig'  %}
+{% trans_default_domain "OSSystemEMTBundle" %}
+
+{% block nav %}
+    {% include "OSSystemEMTBundle:Default:widgets/topmenu.html.twig" %}
+{% endblock %}
+
+{% block content %}
+
+    <h1 class="clear">Export to Excel</h1>
+
+    <form action="" name="exportToExcel" method="post">
+    <div class="content-box">
+        <div class="item">
+            <h3><a href="#">Check the fields you want to export</a></h3>
+                <div class="title"><input type="checkbox" name="id"> Conference id</div>
+                <div class="title"><input type="checkbox" name="title"> Name of the event</div>
+                <div class="title"><input type="checkbox" name="acronym"> Acronym of the event</div>
+                <div class="title"><input type="checkbox" name="createdAt"> Created at </div>
+                <div class="title"><input type="checkbox" name="organizingCompaniesNames"> Organisation name</div>
+                <div class="title"><input type="checkbox" name="contactPersonsNames"> Name(s) of contact person(s)</div>
+                <div class="title"><input type="checkbox" name="organizingEmails"> Organiser’s e-mail address(s)</div>
+                <div class="title"><input type="checkbox" name="website"> Website of the event</div>
+                <div class="title"><input type="checkbox" name="autopublishing"> Publish Pre-clearance</div>
+                <div class="title"><input type="checkbox" name="delegatesMoreThan1Country"> Number of HCPs / delegates</div>
+                <div class="title"><input type="checkbox" name="delegatesAnticipate"> Number of HCPs / delegates</div>
+                <div class="title"><input type="checkbox" name="assesmentNameVenue"> Name of venue</div>
+                <div class="title"><input type="checkbox" name="assesmentCategoryVenue"> Category of venue</div>
+                <div class="title"><input type="checkbox" name="assesmentCity"> City/Town</div>
+                <div class="title"><input type="checkbox" name="assesmentLocalNA"> Local national associations</div>
+                <div class="title"><input type="checkbox" name="assesmentProposedAccomodation"> Accomodation document</div>
+                <div class="title"><input type="checkbox" name="eventProgramme"> Event programme</div>
+                <div class="title"><input type="checkbox" name="commentsText"> Comments text</div>
+                <div class="title"><input type="checkbox" name="is New"> Is new</div>
+                <div class="title"><input type="checkbox" name="therapeuticArea"> Therapeutic area</div>
+                <div class="title"><input type="checkbox" name="therapeuticAreaOther"> Therapeutic area other</div>
+                <div class="title"><input type="checkbox" name="isPreClearance"> Is Pre-Clearance</div>
+                <div class="title"><input type="checkbox" name="assessedOnDate"> Assessed on date</div>
+                <div class="title"><input type="checkbox" name="conferenceStatusText"> Conference status text</div>
+                <div class="title"><input type="checkbox" name="isCORecommendation"> Is CO recommendation</div>
+                <div class="title"><input type="checkbox" name="isPublished"> Is published</div>
+                <div class="title"><input type="checkbox" name="archive"> Archive</div>
+                <div class="title"><input type="checkbox" name="startConferenceDate"> Start of event</div>
+                <div class="title"><input type="checkbox" name="endConferenceDate"> End of event</div>
+                <div class="title"><input type="checkbox" name="assesmentCountry_id"> Country</div>
+                <div class="title"><input type="checkbox" name="conferenceStatus"> Conference status</div>
+                <div class="title"><input type="checkbox" name="conferenceStatus_id"> Conference status id</div>
+                <div class="title"><input type="checkbox" name="documents"> Documents</div>
+        </div>
+    </div>
+    <input class="export-to-excel-form-submit" name="submit-all" type="submit" value="Export all fields to Excel">
+    <input class="export-to-excel-form-submit" name="submit-selected" type="submit" value="Export to Excel">
+    </form>
+{% endblock %}

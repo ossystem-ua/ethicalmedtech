@@ -1,0 +1,27 @@
+<p>Dear {{ conf.user.fName }} {{ conf.user.lName }},</p>
+<p>I refer to your Pre-Clearance request dated {{ conf.startConferenceDate|date('d/m/Y') }} related 
+    to the {{ conf.title }} from {{ conf.startConferenceDate|date('d/m/Y') }} to {{ conf.endConferenceDate|date('d/m/Y') }} 
+    in {{ conf.assesmentCity }}, {{ conf.assesmentCountry }} (herewith referred to as the “Conference”). 
+    You have requested that we provide you with our decision as to whether or not the following criteria 
+    are compliant with the Eucomed Code of Ethical Business Practice:</p>
+<p>{{ conf.conferenceStatusText|raw }}</p>
+<p>I would like to inform you that following our assessment and the above-provided explanations, 
+    we have determined that the submitted criteria are: 
+    <span style="color: red;text-decoration: underline;font-weight: bold;" >NOT COMPLIANT</span>, 
+    therefore the {{ conf.title }} is 
+    <span style="color: red;text-decoration: underline;font-weight: bold;" >NOT PRE-CLEARED for sponsorship of HCPs by Eucomed members.</span></p>
+<p>We invite you to take corrective measures and re-submit the required criteria for 
+    Pre-Clearance at least 6 months prior to the conference starting date. In any event, 
+    please note that according to the rules governing the Conference Vetting System, you 
+    must make a complete submission of all 8 conference assessment criteria up to 75 days 
+    prior to the conference starting date in order for the conference to receive a final 
+    Conference Vetting System assessment.</p>
+<p>Also note that you have the possibility to file an appeal against this decision by 
+    sending an email to the Compliance Panel Chair at info@ethicalmedtech.eu within 
+    10 days after the date of receipt of this email. <br/>
+For further information on the assessment criteria, please visit <a href="http://www.ethicalmedtech.eu">www.ethicalmedtech.eu</a>  or contact 
+<a href="info@ethicalmedtech.eu" mailto="info@ethicalmedtech.eu">me</a> directly.</p>
+<br />
+<p>Sincerely,<br />
+{{signature}}<br />
+Compliance Officer</p>
